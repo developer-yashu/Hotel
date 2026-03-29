@@ -9,7 +9,6 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = 1010;
-//yashu
 
 mongoose.connect("mongodb://127.0.0.1:27017/react")
   .then(() => console.log("MongoDb connected"))
