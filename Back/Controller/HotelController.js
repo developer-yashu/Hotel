@@ -3,15 +3,25 @@ const User = require('../Model/UserModel');
 
 exports.addHotel = async (req, res) => {
     try {
-        const hotel = new Hotel(req.body);
-        await hotel.save();
+
+        const {name,location,price,rating,imageUrl}=req.body;
+
+        if(!(name && location && price && rating && imageUrl)){
+            return res.status(400).json({message :"All filde are required"})
+        }
+        
+        const existName= await Hotel.find({name})
+        if(existName){
+            return res.status(400).json({ message: "Hotel Name already exists" })
+        }
+        const addHotel=new Hotel({name,location,price,rating,imageUrl})
+        await addHotel.save();
         res.status(200).json({ message: "Hotel added successfully" });
     } catch (error) {
         res.status(500).json({ message: "Failed to add hotel", error: error.message });
     }
 };
 
-// consle .logkjdhaskdjhakjd
 
 exports.getHotels = async (req, res) => {
     try {
@@ -25,7 +35,7 @@ exports.getHotels = async (req, res) => {
 // get one
 exports.getOneHotels = async (req, res) => {
     try {
-        const id = req.params.id;
+        const {id} = req.params;
         const data = await Hotel.findById(id);
         res.status(200).json(data);
     } catch (error) {
