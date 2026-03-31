@@ -1,20 +1,20 @@
 const Hotel = require('../Model/HotelModel');
 const User = require('../Model/UserModel');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 exports.addHotel = async (req, res) => {
     try {
 
-        const {name,location,price,rating,imageUrl}=req.body;
-
-        if(!(name && location && price && rating && imageUrl)){
-            return res.status(400).json({message :"All filde are required"})
+        const { name, location, price, rating, imageUrl } = req.body;
+        if (!(name && location && price && rating && imageUrl)) {
+            return res.status(400).json({ message: "All filde are required" })
         }
-        
-        const existName= await Hotel.find({name})
-        if(existName){
+        const existName = await Hotel.findOne({ name })
+        if (existName) {
             return res.status(400).json({ message: "Hotel Name already exists" })
         }
-        const addHotel=new Hotel({name,location,price,rating,imageUrl})
+        const addHotel = new Hotel({ name, location, price, rating, imageUrl })
         await addHotel.save();
         res.status(200).json({ message: "Hotel added successfully" });
     } catch (error) {
@@ -35,7 +35,7 @@ exports.getHotels = async (req, res) => {
 // get one
 exports.getOneHotels = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const data = await Hotel.findById(id);
         res.status(200).json(data);
     } catch (error) {
@@ -43,7 +43,7 @@ exports.getOneHotels = async (req, res) => {
     }
 };
 
-
+//signup
 exports.signup = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -54,7 +54,11 @@ exports.signup = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ message: "Email already exists" });
         }
-        const user = new User({ name, email, password });
+
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        console.log("Hash:", hashedPassword);
+        const user = new User({ name, email, password: hashedPassword });
         await user.save();
         res.status(201).json({ message: "Signup successful" });
     } catch (error) {
@@ -64,10 +68,20 @@ exports.signup = async (req, res) => {
 
 
 
+// login
 exports.loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ email, password });
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        const isMatch = await bcrypt.compare(password, user.password)
+        console.log("isMatch>>>>>>>>", isMatch);
+
+        if (!isMatch) {
+            return res.status(404).json({ message: "Password is worng" })
+        }
         if (user) {
             res.status(200).json({ message: "Login successful" });
         }
@@ -75,4 +89,3 @@ exports.loginUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
- 
