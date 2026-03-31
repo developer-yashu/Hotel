@@ -11,6 +11,8 @@ exports.addHotel = async (req, res) => {
     }
 };
 
+// consle .logkjdhaskdjhakjd
+
 exports.getHotels = async (req, res) => {
     try {
         const hotels = await Hotel.find();
