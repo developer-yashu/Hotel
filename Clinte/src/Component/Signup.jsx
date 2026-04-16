@@ -30,94 +30,74 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12">
-      <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-10 shadow-lg">
-        <h2 className="text-center text-3xl font-extrabold text-gray-900">
-          Create your account
-        </h2>
-
-        <form className="space-y-6" onSubmit={handleSignup}>
-          <div>
-            <label htmlFor="name" className="sr-only">
-              Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              // required
-              placeholder="Name"
-              className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-red-600 focus:ring-2 focus:ring-red-300 focus:outline-none"
-            />
+    <div className="min-h-screen pt-20 flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-blue-50 px-4 py-12">
+      <div className="w-full max-w-md">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-3xl flex items-center justify-center shadow-2xl">
+            <span className="text-3xl">👤</span>
           </div>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
+            Create Account
+          </h1>
+          <p className="text-gray-600">Join us today</p>
+        </div>
 
-          {/* <div>
-            <label htmlFor="number" className="sr-only">
-              Phone Number
-            </label>
-            <input
-              id="number"
-              name="number"
-              type="tel"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-              required
-              placeholder="Mobile Number"
-              className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-red-600 focus:ring-2 focus:ring-red-300 focus:outline-none"
-            />
-          </div> */}
+        <div className="bg-white/70 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/50">
+          <form className="space-y-6" onSubmit={handleSignup}>
+            <div>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Full Name"
+                className="w-full px-4 py-4 text-lg rounded-2xl border border-gray-200 bg-white/50 backdrop-blur-sm placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition-all shadow-lg"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="email" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              // required
-              placeholder="Email address"
-              className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-red-600 focus:ring-2 focus:ring-red-300 focus:outline-none"
-            />
-          </div>
+            <div>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email address"
+                className="w-full px-4 py-4 text-lg rounded-2xl border border-gray-200 bg-white/50 backdrop-blur-sm placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition-all shadow-lg"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="password" className="sr-only">
-              Password
-            </label>
-            <input
-              id="password"
-              // name="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              // required
-              placeholder="Password"
-              className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-red-600 focus:ring-2 focus:ring-red-300 focus:outline-none"
-            />
-          </div>
+            <div>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                className="w-full px-4 py-4 text-lg rounded-2xl border border-gray-200 bg-white/50 backdrop-blur-sm placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition-all shadow-lg"
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="w-full rounded-md bg-red-600 px-4 py-3 text-white font-semibold hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300 transition"
-          >
-            Sign Up
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 text-white py-4 px-6 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-300"
+            >
+              Create Account
+            </button>
+          </form>
 
-        <p className="mt-6 text-center text-gray-600 text-sm">
-          Already have an account?{" "}
-          <Link
-            to="/login"
-            className="text-red-600 font-semibold hover:text-red-800 transition"
-          >
-            Login here
-          </Link>
-        </p>
+          <p className="mt-8 text-center text-sm text-gray-700">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="font-semibold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent hover:from-blue-600 hover:to-blue-700 transition-all"
+            >
+              Sign in here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

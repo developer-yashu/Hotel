@@ -15,83 +15,78 @@ const ViewPage = () => {
   }, [dispatch, id]);
 
   return (
-    <div className="p-5 max-w-6xl mx-auto">
-
-      {/* 🔥 Back Button (FIXED POSITION) */}
-      <div className="mb-4">
+    <div className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-gray-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 px-3 py-1 rounded-lg hover:bg-gray-200 transition text-gray-700"
+          className="mb-8 inline-flex items-center gap-2 px-6 py-3 bg-white/70 backdrop-blur-sm rounded-2xl hover:bg-white shadow-xl hover:shadow-2xl border border-white/50 transition-all text-gray-800 font-medium"
         >
-          ← <span>Back</span>
+          ← Back to Hotels
         </button>
-      </div>
 
-      {/* 🔥 Top Section */}
-      <div className="grid md:grid-cols-2 gap-6 items-center">
-
-        {/* Image */}
-        <img
-          src={HotelOne?.roomType?.image}
-          alt={HotelOne?.name}
-          className="w-full h-80 object-cover rounded-2xl shadow-md"
-        />
-
-        {/* Info */}
-        <div>
-          <h1 className="text-3xl font-bold text-gray-800">
-            {HotelOne?.name}
-          </h1>
-
-          <p className="text-gray-500 mt-2">
-            📍 {HotelOne?.location}
-          </p>
-
-          <div className="flex items-center gap-3 mt-3">
-            <span className="bg-black text-white px-2 py-1 rounded text-sm">
-              ⭐ {HotelOne?.rating}
-            </span>
+        {/* Hero Image + Info */}
+        <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+          {/* Main Image */}
+          <div className="group relative rounded-3xl overflow-hidden shadow-2xl bg-white/50 backdrop-blur-sm">
+            <img
+              src={HotelOne?.roomType?.image || '/placeholder-hotel.jpg'}
+              alt={HotelOne?.name}
+              className="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            {/* Rating */}
+            <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-2xl shadow-2xl">
+              <span className="text-2xl font-bold text-yellow-500">⭐ {HotelOne?.rating}</span>
+            </div>
           </div>
 
-          <h2 className="text-2xl font-semibold text-green-600 mt-4">
-            ₹{HotelOne?.price}
-            <span className="text-sm text-gray-500"> /night</span>
-          </h2>
+          {/* Details */}
+          <div className="space-y-6 lg:pt-8">
+            <div>
+              <h1 className="text-5xl lg:text-6xl font-black bg-gradient-to-r from-gray-900 via-gray-800 to-black bg-clip-text text-transparent mb-4 leading-tight">
+                {HotelOne?.name}
+              </h1>
+              <p className="text-2xl text-gray-600 flex items-center gap-2">
+                📍 {HotelOne?.location}
+              </p>
+            </div>
 
-          {/* Button */}
-          <button
-            onClick={() => navigate(`/booking/${id}`)}
-            className="mt-6 bg-black text-white px-6 py-2 rounded-xl hover:bg-gray-800 transition"
-          >
-            Book Now
-          </button>
+            <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/40">
+              <div className="text-4xl font-black bg-gradient-to-r from-emerald-500 via-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">
+                ₹{HotelOne?.price}
+              </div>
+              <p className="text-xl text-gray-700">per night</p>
+            </div>
+
+            <button
+              onClick={() => navigate(`/booking/${id}`)}
+              className="w-full lg:w-auto bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-6 px-10 rounded-3xl text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 tracking-wide"
+            >
+              Book Now
+            </button>
+          </div>
+        </div>
+
+        {/* Room Details */}
+        <div className="bg-white/70 backdrop-blur-xl rounded-4xl p-12 shadow-2xl border border-white/50">
+          <h2 className="text-4xl font-bold text-gray-800 mb-12 text-center">Room Features</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="group p-8 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:shadow-xl transition-all border border-blue-100 hover:border-blue-200">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">Room Type</h3>
+              <p className="text-xl text-gray-700">{HotelOne?.roomType?.type}</p>
+            </div>
+            <div className="group p-8 rounded-3xl bg-gradient-to-br from-emerald-50 to-green-50 hover:from-emerald-100 hover:shadow-xl transition-all border border-emerald-100 hover:border-emerald-200">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">Bathrooms</h3>
+              <p className="text-xl text-gray-700">{HotelOne?.roomType?.bathrooms}</p>
+            </div>
+            <div className="group p-8 rounded-3xl bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:shadow-xl transition-all border border-purple-100 hover:border-purple-200">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">Amenities</h3>
+              <p className="text-xl text-gray-700 line-clamp-3">{HotelOne?.roomType?.amenities}</p>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* 🔥 Room Details */}
-      <div className="mt-10 bg-gray-100 p-5 rounded-xl shadow-sm">
-        <h2 className="text-xl font-semibold mb-4">Room Details</h2>
-
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-gray-700">
-
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="font-semibold">Type</p>
-            <p>{HotelOne?.roomType?.type}</p>
-          </div>
-
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="font-semibold">Bathrooms</p>
-            <p>{HotelOne?.roomType?.bathrooms}</p>
-          </div>
-
-          <div className="bg-white p-4 rounded-lg shadow">
-            <p className="font-semibold">Amenities</p>
-            <p>{HotelOne?.roomType?.amenities}</p>
-          </div>
-
-        </div>
-      </div>
-
     </div>
   );
 };

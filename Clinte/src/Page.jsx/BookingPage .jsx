@@ -382,123 +382,149 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-200 via-white to-gray-300 flex items-center justify-center p-6">
-      <div className="w-full max-w-6xl">
-        {/* 🔙 Back */}
-        <button
-          onClick={() => navigate(-1)}
-          className="mb-4 text-gray-600 hover:text-black"
-        >
-          ← Back
-        </button>
+    <div className="pt-20 pb-16 min-h-screen bg-gradient-to-br from-indigo-50 via-white to-emerald-50">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-12">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 px-6 py-3 bg-white/70 backdrop-blur-sm rounded-3xl hover:bg-white shadow-xl hover:shadow-2xl border border-white/50 transition-all text-gray-800 font-semibold"
+          >
+            ← Back
+          </button>
+          <div className="flex-1">
+            <h1 className="text-4xl font-bold text-gray-800">Secure Booking</h1>
+            <p className="text-xl text-gray-600 mt-1">{HotelOne?.name}</p>
+          </div>
+        </div>
 
-        {/* 🔥 Main Card */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* LEFT */}
-          <div className="bg-white/70 backdrop-blur-lg rounded-3xl shadow-xl p-8">
-            <h1 className="text-3xl font-bold text-gray-800">
-              {HotelOne?.name}
-            </h1>
-            <p className="text-gray-500 mt-1">📍 {HotelOne?.location}</p>
-
-            <div className="mt-4 text-2xl font-bold text-green-600">
-              ₹{HotelOne?.price}
-              <span className="text-sm text-gray-500 ml-1">/night</span>
-            </div>
-
-            {/* FORM */}
-            <div className="mt-6 space-y-4">
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={clientName}
-                onChange={(e) => setClientName(e.target.value)}
-                className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-black outline-none"
-              />
-
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-black outline-none"
-              />
-
-              <div className="grid grid-cols-2 gap-3">
-                <input
-                  type="date"
-                  value={checkIn}
-                  onChange={(e) => setCheckIn(e.target.value)}
-                  className="p-3 border rounded-xl"
-                />
-                <input
-                  type="date"
-                  value={checkOut}
-                  onChange={(e) => setCheckOut(e.target.value)}
-                  className="p-3 border rounded-xl"
-                />
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Booking Form */}
+          <div className="bg-white/70 backdrop-blur-xl rounded-4xl p-12 shadow-2xl border border-white/50">
+            <div className="space-y-2 mb-8">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                {HotelOne?.name}
+              </h2>
+              <p className="text-2xl text-gray-600">📍 {HotelOne?.location}</p>
+              <div className="text-3xl font-black text-emerald-600 mt-2">
+                ₹{HotelOne?.price} <span className="text-lg text-gray-600 font-normal">/night</span>
               </div>
             </div>
 
-            {/* BUTTON */}
-            <button
-              onClick={handleConfirm}
-              disabled={isConfirmed}
-              className={`w-full mt-6 py-3 rounded-xl font-semibold transition ${
-                isConfirmed
-                  ? "bg-gray-400"
-                  : "bg-black text-white hover:bg-gray-800"
-              }`}
-            >
-              {isConfirmed ? "Booked ✅" : "Confirm Booking"}
-            </button>
+            <form className="space-y-6">
+              <div>
+                <input
+                  type="text"
+                  placeholder="Full Name *"
+                  value={clientName}
+                  onChange={(e) => setClientName(e.target.value)}
+                  className="w-full px-6 py-5 text-xl rounded-3xl border-2 border-gray-200 bg-white/50 backdrop-blur-sm placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all shadow-xl"
+                  required
+                />
+              </div>
+
+              <div>
+                <input
+                  type="email"
+                  placeholder="Email Address *"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-6 py-5 text-xl rounded-3xl border-2 border-gray-200 bg-white/50 backdrop-blur-sm placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all shadow-xl"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <input
+                    type="date"
+                    value={checkIn}
+                    onChange={(e) => setCheckIn(e.target.value)}
+                    className="w-full px-6 py-5 text-xl rounded-3xl border-2 border-gray-200 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition-all shadow-xl"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    value={checkOut}
+                    onChange={(e) => setCheckOut(e.target.value)}
+                    className="w-full px-6 py-5 text-xl rounded-3xl border-2 border-gray-200 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-emerald-100 focus:border-emerald-400 transition-all shadow-xl"
+                  />
+                </div>
+              </div>
+
+              <div className="text-center space-y-2">
+                <p className="text-2xl font-bold text-gray-700">
+                  {days > 0 && `${days} Nights`}
+                </p>
+                <p className="text-4xl font-black text-emerald-600">
+                  ₹{total}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleConfirm}
+                disabled={isConfirmed}
+                className={`w-full py-6 px-8 rounded-3xl text-xl font-bold shadow-2xl transform transition-all duration-300 group focus:outline-none focus:ring-4 ${
+                  isConfirmed
+                    ? "bg-gradient-to-r from-gray-400 to-gray-500 cursor-not-allowed shadow-lg"
+                    : "bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 hover:shadow-3xl hover:-translate-y-1 text-white shadow-xl group-hover:shadow-emerald-500/25"
+                }`}
+              >
+                {isConfirmed ? (
+                  <>
+                    <span className="flex items-center gap-2 justify-center">
+                      <span className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                      Booking Confirmed ✅
+                    </span>
+                  </>
+                ) : (
+                  "Confirm & Book Now"
+                )}
+              </button>
+            </form>
           </div>
 
-          {/* RIGHT */}
+          {/* Summary */}
           {isConfirmed && confirmedData && (
-            <div className="bg-white rounded-3xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold mb-4">Booking Summary</h2>
-
-              <div className="space-y-3 text-gray-700">
-                <div className="flex justify-between">
-                  <span>Name</span>
+            <div className="lg:sticky lg:top-20 h-fit bg-white/90 backdrop-blur-xl rounded-4xl p-12 shadow-2xl border border-white/50">
+              <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                Booking Confirmed!
+              </h2>
+              <div className="space-y-6 text-lg">
+                <div className="flex justify-between py-3 border-b border-gray-200">
+                  <span className="font-semibold text-gray-700">Name</span>
                   <span>{confirmedData.clientName}</span>
                 </div>
-
-                <div className="flex justify-between">
-                  <span>Email</span>
+                <div className="flex justify-between py-3 border-b border-gray-200">
+                  <span className="font-semibold text-gray-700">Email</span>
                   <span>{confirmedData.email}</span>
                 </div>
-
-                <div className="flex justify-between">
-                  <span>Check-In</span>
+                <div className="flex justify-between py-3 border-b border-gray-200">
+                  <span className="font-semibold text-gray-700">Check-in</span>
                   <span>{confirmedData.checkIn}</span>
                 </div>
-
-                <div className="flex justify-between">
-                  <span>Check-Out</span>
+                <div className="flex justify-between py-3 border-b border-gray-200">
+                  <span className="font-semibold text-gray-700">Check-out</span>
                   <span>{confirmedData.checkOut}</span>
                 </div>
-
-                <div className="flex justify-between">
-                  <span>Nights</span>
-                  <span>{confirmedData.days}</span>
+                <div className="flex justify-between py-3 border-b border-gray-200">
+                  <span className="font-semibold text-gray-700">Nights</span>
+                  <span className="font-bold">{confirmedData.days}</span>
                 </div>
               </div>
-
-              {/* PRICE BOX */}
-              <div className="mt-6 bg-gray-100 p-5 rounded-xl">
-                <div className="flex justify-between text-gray-600">
-                  <span>Price × Nights</span>
-                  <span>
-                    ₹{HotelOne?.price} × {confirmedData.days}
+              <div className="mt-8 pt-8 border-t-4 border-emerald-200 bg-emerald-50 rounded-3xl p-6">
+                <div className="flex justify-between items-center text-3xl font-black">
+                  <span>Total</span>
+                  <span className="bg-gradient-to-r from-emerald-500 to-emerald-600 bg-clip-text text-transparent">
+                    ₹{total}
                   </span>
                 </div>
-
-                <div className="border-t mt-3 pt-3 flex justify-between text-xl font-bold">
-                  <span>Total</span>
-                  <span className="text-green-600">₹{confirmedData.total}</span>
-                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <p className="text-sm text-emerald-700 font-medium">Check your History tab or email for details</p>
               </div>
             </div>
           )}
